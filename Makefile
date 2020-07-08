@@ -21,7 +21,7 @@ BUILD_DIR = build
 # LIBRARY_PATH = /net/factory/share/projects/code/mculib2
 # LIBRARY_PATH = /net/factory/users/dvk/code/mculib2
 LIBRARY_PATH = mculib2
-MCULIB_VERSION = d14308ac97e448953aaaccac59ea6b82a5919139
+MCULIB_VERSION = d48ba69068be8f8dab071914ff53bbc7f8cc304d
 
 CPP_SOURCES_F0 = src/main.cpp
 
