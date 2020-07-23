@@ -15,6 +15,8 @@ public:
    void move_down();
    void stop();
    void reset();
+   void grab_on();
+   void grab_off();
    void operator()();
 };
 
@@ -37,6 +39,18 @@ void Automatic <Horizontal, Vertical, Encoder>::reset()
    horizontal.stop();
    vertical.stop();
    state = State::wait;
+}
+
+template <class Horizontal, class Vertical, class Encoder>
+void Automatic <Horizontal, Vertical, Encoder>::grab_on()
+{
+   vertical.grab_on();
+}
+
+template <class Horizontal, class Vertical, class Encoder>
+void Automatic <Horizontal, Vertical, Encoder>::grab_off()
+{
+   vertical.grab_off();
 }
 
 template <class Horizontal, class Vertical, class Encoder>

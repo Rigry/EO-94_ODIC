@@ -25,7 +25,8 @@ struct Operation {
    bool left        :1; // Bit 9 Left: move left (1);
    bool up          :1; // Bit 10 Up: up (1);
    bool down        :1; // Bit 11 Down: down (1);
-   uint16_t res     :4; // Bits 15:12 res: Reserved, must be kept cleared
+   bool grab        :1; // Bit 12 Basket grab(1);
+   uint16_t res     :3; // Bits 15:13 res: Reserved, must be kept cleared
 };
 struct Sensors {
    bool sense_right:1;  // Bit 0 sense_right: Right Sensor
@@ -51,7 +52,7 @@ struct States {
    bool stop_v    :1;  // Bit 12 stop_v: stop vertical move
    bool enable    :1;  // Bit 13 enable: disable(0), enable (1)
    bool lost      :1;  // Bit 14 lost: lost_coordinate(1)
-   uint16_t res   :1;  // Bits 15 res: Reserved, must be kept cleared
+   bool grab      :1;  // Bit 15 Basket grab(1);
 };
 struct Step {
    uint16_t distance :14; // на сколько шагнуть

@@ -46,13 +46,14 @@ using Launch      = DO2;
 using Side        = DO3;
 using Finish      = DO4;
 using EL_brake    = DO5;
+using Grab        = DO6;
 
 __IO auto pa = reinterpret_cast<PA*>(PA::Base);
 
 int main(void)
 {
    using Encoder     = Encoder     <TIM1, DI2, DI1, false>;
-   using Control     = Control     <Speed, Launch, Side, Finish, Up, Down, EL_brake>;
+   using Control     = Control     <Speed, Launch, Side, Finish, Up, Down, EL_brake, Grab>;
    using Horizontal  = Horizontal  <Control, Encoder>;
    using Vertical    = Vertical    <Control, Sense_up, Sense_down>;
    using Automatic   = Automatic   <Horizontal, Vertical, Encoder>;

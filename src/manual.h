@@ -22,6 +22,8 @@ public:
    void slow_stop();
    void stop();
    void reset();
+   void grab_on();
+   void grab_off();
    void step_left (uint16_t);
    void step_right (uint16_t);
    void operator()();
@@ -145,6 +147,18 @@ void Manual<Control, Vertical, Sense_left, Sense_right, Encoder>::reset()
    stop_h();
    stop_v();
    state = State::wait;
+}
+
+template <class Control, class Vertical, class Sense_left, class Sense_right, class Encoder>
+void Manual<Control, Vertical, Sense_left, Sense_right, Encoder>::grab_on()
+{
+   control.grab_on();
+}
+
+template <class Control, class Vertical, class Sense_left, class Sense_right, class Encoder>
+void Manual<Control, Vertical, Sense_left, Sense_right, Encoder>::grab_off()
+{
+   control.grab_off();
 }
 
 template <class Control, class Vertical, class Sense_left, class Sense_right, class Encoder>

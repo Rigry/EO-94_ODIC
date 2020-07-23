@@ -129,6 +129,11 @@ public:
                } else if (modbus.inRegs.operation.down and not modbus.inRegs.operation.up) {
                   automatic.move_down();
                }
+               if (modbus.inRegs.operation.grab) {
+                  automatic.grab_on();
+               } else if (not modbus.inRegs.operation.grab) {
+                  automatic.grab_off();
+               }
                if (modbus.inRegs.operation.mode == Operation::Mode::manual_mode) {
                   automatic.reset();
                   state_manual();
@@ -168,6 +173,11 @@ public:
                   manual.right();
                } else if (modbus.inRegs.operation.left and not modbus.inRegs.operation.right and not modbus.inRegs.operation.stop_h) {
                   manual.left();
+               }
+               if (modbus.inRegs.operation.grab) {
+                  manual.grab_on();
+               } else if (not modbus.inRegs.operation.grab) {
+                  manual.grab_off();
                }
                if (modbus.inRegs.operation.mode == Operation::Mode::auto_mode and Tilt::isSet()) {
                   manual.reset();

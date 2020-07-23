@@ -22,6 +22,8 @@ public:
    void stop();
    void up();
    void down();
+   void grab_on();
+   void grab_off();
    bool isUp();
    bool isDown();
    bool isWorking(){return not ((state == State::Wait) or (state == State::Pause_Wait));}
@@ -77,6 +79,22 @@ void Vertical<Control, Sense_up, Sense_down>::down ()
    }
 
 }
+
+template <class Control, class Sense_up, class Sense_down>
+void Vertical<Control, Sense_up, Sense_down>::grab_on ()
+{
+   if (isDown ()) {
+      control.grab_on();
+   }
+}
+
+template <class Control, class Sense_up, class Sense_down>
+void Vertical<Control, Sense_up, Sense_down>::grab_off ()
+{
+   if (isDown ()) {
+      control.grab_off();
+   }
+} 
 
 template <class Control, class Sense_up, class Sense_down>
 void Vertical<Control, Sense_up, Sense_down>::wake ()
