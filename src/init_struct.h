@@ -35,7 +35,9 @@ struct Sensors {
    bool origin     :1;  // Bit 3 origin: Origin Sensor
    bool sense_up   :1;  // Bit 4 sense_up: Up Sensor
    bool sense_down :1;  // Bit 5 sense_down: Down Sensor
-   uint16_t res    :10; // Bits 15:6 res: Reserved, must be kept cleared
+   bool emerg_up   :1;  // Bit 6 emerg_up: Emergency up sensor
+   bool emerg_down :1;  // Bit 7 emerg_down: Emergency down sensor
+   uint16_t res    :8;  // Bits 15:8 res: Reserved, must be kept cleared
 };
 struct States {
    enum Mode      {wait = 0b000, auto_mode, manual_mode, search, calibration, emergency};

@@ -39,6 +39,8 @@ using Sense_right = DI5;
 using Sense_left  = DI6;
 using Origin      = DI7;
 using Tilt        = DI8;
+using Emerg_up    = DI9;
+using Emerg_down  = DI10;
 using Up          = DO7;
 using Down        = DO8;
 using Speed       = DO1;
@@ -55,7 +57,7 @@ int main(void)
    using Encoder     = Encoder     <TIM1, DI2, DI1, false>;
    using Control     = Control     <Speed, Launch, Side, Finish, Up, Down, EL_brake, Grab>;
    using Horizontal  = Horizontal  <Control, Encoder>;
-   using Vertical    = Vertical    <Control, Sense_up, Sense_down>;
+   using Vertical    = Vertical    <Control, Sense_up, Sense_down, Emerg_up, Emerg_down>;
    using Automatic   = Automatic   <Horizontal, Vertical, Encoder>;
    using Calibration = Calibration <Control, Sense_left, Sense_right, Encoder>;
    using Search      = Search      <Control, Sense_left, Sense_right, Origin, Encoder>;
@@ -63,7 +65,7 @@ int main(void)
    using Modbus      = MBslave     <InRegs, OutRegs, USART_>;
    using Flash       = decltype(flash);
    using Global      = Global      <Modbus, Flash, Encoder, Horizontal, Vertical, Manual, Search, Automatic,
-                                    Calibration, Control, Origin, Sense_up, Sense_down, Tilt, Sense_right, Sense_left>;
+                                    Calibration, Control, Origin, Sense_up, Sense_down, Tilt, Sense_right, Sense_left, Emerg_up, Emerg_down>;
 
    Global global {modbus, flash};
    // Control control{modbus.outRegs.states};

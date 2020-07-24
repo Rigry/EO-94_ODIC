@@ -4,7 +4,7 @@
 #define ADR(reg) GET_ADR(InRegs, reg)
 
 template <class Modbus, class Flash, class Encoder, class Horizontal, class Vertical, class Manual, class Search, class Automatic,
-          class Calibration, class Control, class Origin, class Sense_up, class Sense_down, class Tilt, class Sense_right, class Sense_left>
+          class Calibration, class Control, class Origin, class Sense_up, class Sense_down, class Tilt, class Sense_right, class Sense_left, class Emerg_up,class Emerg_down>
 class Global
 {
    enum State {wait_, search_, automatic_, calibration_, manual_, emergency_} state {State::wait_};
@@ -214,6 +214,8 @@ public:
       modbus.outRegs.sensors.sense_left  = Sense_left ::isSet();
       modbus.outRegs.sensors.origin      = Origin     ::isSet();
       modbus.outRegs.sensors.tilt        = Tilt       ::isSet();
+      modbus.outRegs.sensors.emerg_up    = Emerg_up   ::isSet();
+      modbus.outRegs.sensors.emerg_down  = Emerg_down ::isSet();
       if (modbus.outRegs.sensors.origin)
          encoder = 0;
       modbus.outRegs.coordinate          = encoder;
@@ -264,6 +266,10 @@ public:
                   falling = true;
                   lost_coordinate = true;
                   modbus.outRegs.states.lost = lost_coordinate;
+                  automatic.stop();
+                  state = State::emergency_;
+                  modbus.outRegs.states.mode = States::Mode::emergency;
+               } else if (Emerg_up::isSet() or Emerg_down::isSet()) {
                   automatic.stop();
                   state = State::emergency_;
                   modbus.outRegs.states.mode = States::Mode::emergency;
