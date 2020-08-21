@@ -84,7 +84,7 @@ void Horizontal <Control, Encoder>::move(int16_t coordinate)
                } else if (coordinate > (encoder + brake)) {
                   control.fast();
                   control.slow_stop();
-                  encoder.setCompare((coordinate - brake);
+                  encoder.setCompare(coordinate - brake);
                   state = State::right_fast;
                } 
                control.start();
