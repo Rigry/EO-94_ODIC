@@ -83,7 +83,7 @@ void Vertical<Control, Sense_up, Sense_down, Emerg_up, Emerg_down>::down ()
 template <class Control, class Sense_up, class Sense_down, class Emerg_up, class Emerg_down>
 void Vertical<Control, Sense_up, Sense_down, Emerg_up, Emerg_down>::grab_on ()
 {
-   if (isDown ()) {
+   if (isDown () or isUp()) {
       control.grab_on();
    }
 }
@@ -91,7 +91,7 @@ void Vertical<Control, Sense_up, Sense_down, Emerg_up, Emerg_down>::grab_on ()
 template <class Control, class Sense_up, class Sense_down, class Emerg_up, class Emerg_down>
 void Vertical<Control, Sense_up, Sense_down, Emerg_up, Emerg_down>::grab_off ()
 {
-   if (isDown ()) {
+   if (isDown () or isUp()) {
       control.grab_off();
    }
 } 
