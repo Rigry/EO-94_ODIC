@@ -54,6 +54,9 @@ __IO auto pa = reinterpret_cast<PA*>(PA::Base);
 
 int main(void)
 {
+   Timer delay_on{3000};
+   while (not delay_on.done()){}
+   
    using Encoder     = Encoder     <TIM1, DI2, DI1, false>;
    using Control     = Control     <Speed, Launch, Side, Finish, Up, Down, EL_brake, Grab>;
    using Horizontal  = Horizontal  <Control, Encoder>;
@@ -66,7 +69,7 @@ int main(void)
    using Flash       = decltype(flash);
    using Global      = Global      <Modbus, Flash, Encoder, Horizontal, Vertical, Manual, Search, Automatic,
                                     Calibration, Control, Origin, Sense_up, Sense_down, Tilt, Sense_right, Sense_left, Emerg_up, Emerg_down>;
-
+   
    Global global {modbus, flash};
    // Control control{modbus.outRegs.states};
    // control.init();
@@ -98,6 +101,7 @@ int main(void)
 
    // CONFIGURE_PIN(PA7, Output);
    // PA7::set();
+
    while (1)
    {
       
