@@ -17,6 +17,7 @@ class Horizontal : Interrupting
    int16_t last_coordinate{0};
 public:
    int16_t brake;
+   uint16_t delta;
    Horizontal (Control& control, Encoder& encoder, int16_t brake);
    bool is_working(){return state != State::wait;}
    void stop ();
@@ -64,7 +65,7 @@ void Horizontal <Control, Encoder>::move(int16_t coordinate)
                if (coordinate >= (encoder - brake)) {
                   control.slow();
                   control.fast_stop();
-                  encoder.setCompare(coordinate);
+                  encoder.setCompare(coordinate + delta);
                   state = State::left_slow;
                } else if (coordinate < (encoder - brake)) {
                   control.fast();
@@ -78,12 +79,12 @@ void Horizontal <Control, Encoder>::move(int16_t coordinate)
                if (coordinate <= (encoder + brake)) {
                   control.slow();
                   control.fast_stop();
-                  encoder.setCompare(coordinate);
+                  encoder.setCompare(coordinate - delta);
                   state = State::right_slow;
                } else if (coordinate > (encoder + brake)) {
                   control.fast();
                   control.slow_stop();
-                  encoder.setCompare(coordinate - brake);
+                  encoder.setCompare((coordinate - brake);
                   state = State::right_fast;
                } 
                control.start();

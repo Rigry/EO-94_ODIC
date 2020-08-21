@@ -93,6 +93,11 @@ public:
                = vertical.time_pause
                = modbus.inRegs.time_pause;
             break;
+         case ADR (delta):
+            flash.delta
+               = horizontal.delta
+               = modbus.inRegs.delta;
+            break;
          case ADR (operation):
             if (state_is_wait() and modbus.inRegs.operation.enable) {
                state_search();

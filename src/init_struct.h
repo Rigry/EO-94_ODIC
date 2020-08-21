@@ -92,7 +92,7 @@ struct InRegs {
    uint16_t  time_pause;      // 6
    Operation operation;       // 7
    Step      step;            // 8
-   // uint16_t  delta;
+   uint16_t  delta;           // 9
    // int16_t   origin;
    // Zone      zone;
    // int16_t   zone_coordinate[16]; 
@@ -129,7 +129,7 @@ struct FlashData {
    int16_t  brake              =  100;
    uint16_t time_pause         =  3000;
    // int16_t  origin             =  0;
-   // uint16_t delta              =  10;
+   uint16_t delta              =  10;
    int16_t  min_coordinate     = -16384;
    int16_t  max_coordinate     =  16384;
    // int16_t  zone_coordinate[16]; 
