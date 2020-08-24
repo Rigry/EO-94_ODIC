@@ -126,10 +126,10 @@ struct FlashData {
       .res          = 0
    };
    uint8_t  modbusAddress      =  1;
-   int16_t  brake              =  100;
+   int16_t  brake              =  1000;
    uint16_t time_pause         =  3000;
    // int16_t  origin             =  0;
-   uint16_t delta              =  10;
+   uint16_t delta              =  14;
    int16_t  min_coordinate     = -16384;
    int16_t  max_coordinate     =  16384;
    // int16_t  zone_coordinate[16]; 

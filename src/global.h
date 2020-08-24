@@ -44,7 +44,7 @@ public:
       : modbus      {modbus}
       , flash       {flash}
       , control     {modbus.outRegs.states}
-      , horizontal  {control, encoder, flash.brake}
+      , horizontal  {control, encoder, flash.brake, flash.delta}
       , vertical    {control, flash.time_pause}
       , manual      {control, vertical, encoder}
       , search      {control, encoder}

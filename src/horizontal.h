@@ -18,7 +18,7 @@ class Horizontal : Interrupting
 public:
    int16_t brake;
    uint16_t delta;
-   Horizontal (Control& control, Encoder& encoder, int16_t brake);
+   Horizontal (Control& control, Encoder& encoder, int16_t brake, uint16_t delta);
    bool is_working(){return state != State::wait;}
    void stop ();
    void move (int16_t coordinate);
@@ -26,10 +26,11 @@ public:
 };
 
 template <class Control, class Encoder>
-Horizontal <Control, Encoder>::Horizontal (Control& control, Encoder& encoder, int16_t brake)
+Horizontal <Control, Encoder>::Horizontal (Control& control, Encoder& encoder, int16_t brake, uint16_t delta)
    : control {control}
    , encoder {encoder}
    , brake   {brake}
+   , delta   {delta}
 {encoder.withInterrupt().subscribe(this);}
 
 template <class Control, class Encoder>
@@ -103,7 +104,7 @@ void Horizontal <Control, Encoder>::move(int16_t coordinate)
                control.fast_stop();
                control.stop_h();
                state = State::wait;
-               move (coordinate);
+               move (coordinate - delta);
             } else if (coordinate >= (encoder + brake)) {
                encoder.setCompare(coordinate - brake);
                control.fast();
@@ -124,7 +125,7 @@ void Horizontal <Control, Encoder>::move(int16_t coordinate)
                control.fast_stop();
                control.stop_h();
                state = State::wait;
-               move (coordinate);
+               move (coordinate + delta);
             } else if (coordinate <= (encoder - brake)) {
                encoder.setCompare(coordinate + brake);
                control.fast();
@@ -158,7 +159,7 @@ void Horizontal <Control, Encoder>::interrupt()
       break;
       case right_fast:
          // if (encoder == (coordinate - brake)) 
-            goal = coordinate;
+            goal = (coordinate - delta);
             encoder.setCompare(goal);
             state = State::braking;
             control.slow();
@@ -172,7 +173,7 @@ void Horizontal <Control, Encoder>::interrupt()
       break;
       case left_fast:
          // if (encoder == (coordinate + brake))
-            goal = coordinate;
+            goal = (coordinate + delta);
             encoder.setCompare(goal);
             state = State::braking;
             control.slow();
